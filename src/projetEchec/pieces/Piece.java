@@ -2,21 +2,22 @@ package projetEchec.pieces;
 
 import java.util.ArrayList;
 
+import projetEchec.IPlayer;
 import projetEchec.UI.Board;
 import projetEchec.UI.Cell;
 
 public abstract class Piece {
-	private Cell _cell;
+	private IPlayer _owner;
 	
 	public abstract ArrayList<Cell> getPossibleDestinations(Board board);
+	public abstract String getIconPath();
 	
-	public Cell getCell()
-	{
-		return _cell;
+	public IPlayer getOwner(){
+		return _owner;
 	}
 	
-	public void setCell(Cell cell)
-	{
-		_cell = cell;
+	public Piece(IPlayer owner) {
+		_owner = owner;
 	}
+	
 }
