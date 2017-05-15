@@ -36,7 +36,13 @@ public class Board extends JPanel{
 		}
 		
 		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
-		
+		getCell(1, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(2, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(3, 0).setPiece(new Queen(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(4, 0).setPiece(new King(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(5, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(6, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(7, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
 		//todo finish pieces set up
 	}
 	
