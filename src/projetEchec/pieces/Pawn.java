@@ -14,13 +14,14 @@ public class Pawn extends Piece {
 
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
+		ArrayList<Cell> result = new ArrayList<Cell>();
+		//result.add()
 		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 
 	@Override
 	public String getIconPath() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

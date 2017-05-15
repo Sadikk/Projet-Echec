@@ -20,10 +20,10 @@ public class Board extends JPanel{
 	
 	private void initBoard(){
 		//generating grid
-		for (int i = 1; i <= BOARD_SIZE; i++) {
-        	for (int j = 1; j <= BOARD_SIZE; j++) {
+		for (int i = 0; i < BOARD_SIZE; i++) {
+        	for (int j = 0; j < BOARD_SIZE; j++) {
         		Cell cell = new Cell(j, i);
-        		_cells[j -1][i -1] = cell;
+        		_cells[j][i] = cell;
                 add(cell);
         	}  
         }
@@ -36,6 +36,7 @@ public class Board extends JPanel{
 		}
 		
 		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
+		
 		//todo finish pieces set up
 	}
 	
