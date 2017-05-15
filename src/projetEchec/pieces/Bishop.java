@@ -20,7 +20,7 @@ public class Bishop extends Piece {
 
 	@Override
 	public String getIconPath() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return null;
 	}
 

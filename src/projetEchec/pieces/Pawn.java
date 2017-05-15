@@ -22,6 +22,7 @@ public class Pawn extends Piece {
 
 	@Override
 	public String getIconPath() {
+		
 		return null;
 	}
 
