@@ -36,8 +36,16 @@ public class Board extends JPanel{
 		}
 		
 		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
+		// piece J2 rank 8 
+		getCell(0, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(1, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(2, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(3, 7).setPiece(new King(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(4, 7).setPiece(new Queen(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(5, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(6, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
+		getCell(7, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
 		
-		//todo finish pieces set up
 	}
 	
 	public Cell getCell(int x, int y){
