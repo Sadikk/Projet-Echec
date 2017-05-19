@@ -77,42 +77,42 @@ public class Board extends JPanel{
         {
             case DIRECTION_EAST:
                 {
-                	cell = new Cell(X + step, Y + step);
+                	cell = new Cell(X + step, Y + step, this);
                     break;
                 }
             case DIRECTION_SOUTH_EAST:
                 {
-                	cell = new Cell(X + step, Y);
+                	cell = new Cell(X + step, Y, this);
                     break;
                 }
             case DIRECTION_SOUTH:
                 {
-                	cell = new Cell(X + step, Y - step);
+                	cell = new Cell(X + step, Y - step, this);
                     break;
                 }
             case DIRECTION_SOUTH_WEST:
                 {
-                	cell = new Cell(X, Y - step);
+                	cell = new Cell(X, Y - step, this);
                     break;
                 }
             case DIRECTION_WEST:
                 {
-                	cell = new Cell(X - step, Y - step);
+                	cell = new Cell(X - step, Y - step, this);
                     break;
                 }
             case DIRECTION_NORTH_WEST:
                 {
-                	cell = new Cell(X - step, Y);
+                	cell = new Cell(X - step, Y, this);
                     break;
                 }
             case DIRECTION_NORTH:
                 {
-                	cell = new Cell(X - step, Y + step);
+                	cell = new Cell(X - step, Y + step, this);
                     break;
                 }
             case DIRECTION_NORTH_EAST:
                 {
-                	cell = new Cell(X, Y + step);
+                	cell = new Cell(X, Y + step, this);
                     break;
                 }
             default:
