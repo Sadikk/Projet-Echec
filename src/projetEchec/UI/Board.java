@@ -22,7 +22,7 @@ public class Board extends JPanel{
 		//generating grid
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
-        		Cell cell = new Cell(j, i);
+        		Cell cell = new Cell(j, i, this);
         		_cells[j][i] = cell;
                 add(cell);
         	}  
@@ -32,10 +32,10 @@ public class Board extends JPanel{
 		for (int i = 0; i < BOARD_SIZE; i++)
 		{
 			getCell(i, 1).setPiece(new Pawn(MainWindow.getInstance().getModel().getFirstPlayer()));
-			getCell(i, 7).setPiece(new Pawn(MainWindow.getInstance().getModel().getSecondPlayer()));
+			getCell(i, 6).setPiece(new Pawn(MainWindow.getInstance().getModel().getSecondPlayer()));
 		}
 		
-		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
+		
 		// piece J2 rank 8 
 		getCell(0, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(1, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
@@ -46,7 +46,7 @@ public class Board extends JPanel{
 		getCell(6, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(7, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
 		
-		
+		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(1, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(2, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(3, 0).setPiece(new Queen(MainWindow.getInstance().getModel().getFirstPlayer()));
@@ -58,7 +58,7 @@ public class Board extends JPanel{
 	
 	public Cell getCell(int x, int y){
 		if (isInBoard(x, y))
-			return _cells[y][x];
+			return _cells[x][y];
 		else
 			return null;
 	}
@@ -77,42 +77,42 @@ public class Board extends JPanel{
         {
             case DIRECTION_EAST:
                 {
-                	cell = new Cell(X + step, Y + step);
+                	cell = new Cell(X + step, Y + step, this);
                     break;
                 }
             case DIRECTION_SOUTH_EAST:
                 {
-                	cell = new Cell(X + step, Y);
+                	cell = new Cell(X + step, Y, this);
                     break;
                 }
             case DIRECTION_SOUTH:
                 {
-                	cell = new Cell(X + step, Y - step);
+                	cell = new Cell(X + step, Y - step, this);
                     break;
                 }
             case DIRECTION_SOUTH_WEST:
                 {
-                	cell = new Cell(X, Y - step);
+                	cell = new Cell(X, Y - step, this);
                     break;
                 }
             case DIRECTION_WEST:
                 {
-                	cell = new Cell(X - step, Y - step);
+                	cell = new Cell(X - step, Y - step, this);
                     break;
                 }
             case DIRECTION_NORTH_WEST:
                 {
-                	cell = new Cell(X - step, Y);
+                	cell = new Cell(X - step, Y, this);
                     break;
                 }
             case DIRECTION_NORTH:
                 {
-                	cell = new Cell(X - step, Y + step);
+                	cell = new Cell(X - step, Y + step, this);
                     break;
                 }
             case DIRECTION_NORTH_EAST:
                 {
-                	cell = new Cell(X, Y + step);
+                	cell = new Cell(X, Y + step, this);
                     break;
                 }
             default:

@@ -8,6 +8,7 @@ import projetEchec.UI.Cell;
 
 public abstract class Piece {
 	private IPlayer _owner;
+	private Cell _cell;
 	
 	public abstract ArrayList<Cell> getPossibleDestinations(Board board);
 	public abstract String getIconPath();
@@ -20,7 +21,6 @@ public abstract class Piece {
 		_owner = owner;
 	}
 	
-	 private Cell _cell;
 	 
 	public Cell getCell() {
 		return _cell; 
@@ -30,6 +30,4 @@ public abstract class Piece {
 		_cell = cell; 
 	}
 		
-		
-	
 }

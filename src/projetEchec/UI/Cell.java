@@ -21,12 +21,14 @@ public class Cell extends JLabel implements MouseListener {
 	private int _y;
 	private boolean _highlighted = false;
 	private Piece _piece;
+	private Board _board;
 	
 	
-	public Cell(int x, int y) {
-		super(/*x + "/" + y*/);
+	public Cell(int x, int y, Board board) {
+		super("x = " + x + " y = " + y);
 		_x = x;
 		_y = y;
+		_board = board;
 		if ((x+y) % 2 == 0)
 			setBackground(Color.white);
 		else
@@ -49,11 +51,21 @@ public class Cell extends JLabel implements MouseListener {
 		return _piece;
 	}
 	
+	public boolean getHighlighted(){
+		return _highlighted;
+	}
+	
 	public void setPiece(Piece piece){
+		if (_piece != null)
+		{
+			_piece.setCell(null);
+		}
 		_piece = piece;
 		if (_piece != null)
 		{
+			_piece.setCell(this);
 			String path = _piece.getIconPath();
+			setText(_piece.getClass().getSimpleName());
 			if (path != null){
 				setOpaque(false);
 				setIcon(new ImageIcon());
@@ -79,6 +91,12 @@ public class Cell extends JLabel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse clicked on " + this.toString());
 		highlight();
+		if (_piece != null)
+		{
+			for (Cell cell: _piece.getPossibleDestinations(_board)) {
+				 cell.highlight();
+			}
+		}
 	}
 
 	@Override
