@@ -20,4 +20,16 @@ public abstract class Piece {
 		_owner = owner;
 	}
 	
+	 private Cell _cell;
+	 
+	public Cell getCell() {
+		return _cell; 
+	}
+	
+	public void setCell (Cell cell) {
+		_cell = cell; 
+	}
+		
+		
+	
 }

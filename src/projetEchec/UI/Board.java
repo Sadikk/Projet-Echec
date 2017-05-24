@@ -68,7 +68,7 @@ public class Board extends JPanel{
 				&& y < BOARD_SIZE && y >= 0;
 	}
 	
-	public Cell GetCellInDirection(Cell from, DirectionsEnum direction, short step) throws Exception
+	public Cell getCellInDirection(Cell from, DirectionsEnum direction, int step) throws Exception
     {
         Cell cell;
         int X = from.getCellX();
