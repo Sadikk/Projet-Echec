@@ -11,7 +11,16 @@ public abstract class Piece {
 	private IPlayer _owner;
 	private Cell _cell;
 	
+	/**
+	 * Recupere tous les coups legaux disponibles de la piece
+	 * @param board Plateau de jeu
+	 * @return Collection des cellules possibles
+	 */
 	public abstract ArrayList<Cell> getPossibleDestinations(Board board);
+	/**
+	 * Recupere le chemin vers l'icone associee à la piece
+	 * @return le chemin
+	 */
 	public abstract String getIconPath();
 	
 	public IPlayer getOwner(){
@@ -30,6 +39,10 @@ public abstract class Piece {
 		_cell = cell; 
 	}
 	
+	/**
+	 * Effectue le mouvement de la pièce et passe au tour suivant
+	 * @param cell cellule de destination de la pièce
+	 */
 	public void moveTo(Cell cell){
 		_cell.setPiece(null);
 		setCell(cell);

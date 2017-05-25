@@ -32,9 +32,9 @@ public class Cell extends JLabel implements MouseListener {
 		_y = y;
 		_board = board;
 		if ((x+y) % 2 == 0)
-			setBackground(Color.white);
+			setBackground(new Color(240,217,181));
 		else
-			setBackground(Color.black);
+			setBackground(new Color(181,136,99));
 		setPreferredSize(new Dimension(68,68));
         addMouseListener(this);
         setOpaque(true);
@@ -75,7 +75,6 @@ public class Cell extends JLabel implements MouseListener {
 			if (path != null){
 				URL imageUrl = this.getClass().getResource(path);
 				setText(null);
-				setOpaque(false);
 				setIcon(new ImageIcon(imageUrl, "test"));
 				revalidate();
 			}

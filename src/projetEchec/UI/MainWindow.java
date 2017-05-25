@@ -18,11 +18,11 @@ public class MainWindow extends JFrame {
 		return _model;
 	}
 	
-	
+	//singleton
 	private static MainWindow INSTANCE = new MainWindow();
- 
 	public static MainWindow getInstance()
 	{	
 		return INSTANCE;
 	}
+	//end singleton
 }

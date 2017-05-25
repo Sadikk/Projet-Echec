@@ -1,6 +1,8 @@
 package projetEchec.UI;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import projetEchec.IPlayer;
@@ -19,6 +21,9 @@ public class Board extends JPanel{
         initBoard();
 	}
 	
+	/**
+	 * Genere le plateau de jeu avec le placement initial des pieces
+	 */
 	private void initBoard(){
 		//generating grid
 		for (int i = 0; i < BOARD_SIZE; i++) {
@@ -57,6 +62,13 @@ public class Board extends JPanel{
 		getCell(7, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
 	}
 	
+	/**
+	 * Recupere une cellule du plateau de jeu depuis ses coordonnees
+	 * @param x abscisse
+	 * @param y ordonnee 
+	 * @return La cellule du plateau de jeu aux coordonnees (x,y)
+	 * @author Valentin
+	 */
 	public Cell getCell(int x, int y){
 		if (isInBoard(x, y))
 			return _cells[x][y];
@@ -64,11 +76,22 @@ public class Board extends JPanel{
 			return null;
 	}
 	
+	/**
+	 * Verifie qu'une cellule est à l'intérieur du plateau de jeu
+	 * @param x abscisse de la cellule
+	 * @param y ordonnee de la cellule
+	 * @return true si à l'intérieur du plateau, faux sinon
+	 * @author Valentin
+	 */
 	public boolean isInBoard(int x, int y){
 		return x < BOARD_SIZE && x >= 0
 				&& y < BOARD_SIZE && y >= 0;
 	}
 	
+	/**
+	 * Déselectionne toutes les cellules du plateau
+	 * @author Valentin
+	 */
 	public void clearHighlights(){
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
@@ -78,6 +101,12 @@ public class Board extends JPanel{
 		}
 	}
 	
+	/**
+	 * Récupère la pièce selectionnée actuellement par un joueur
+	 * @param owner Proprietaire de la pièce
+	 * @return la pièce selectionnée
+	 * @author Valentin
+	 */
 	public Piece getHighlightedPiece(IPlayer owner){
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
@@ -88,6 +117,32 @@ public class Board extends JPanel{
 		return null;
 	}
 	
+	/**
+	 * Retourne le nombre de mouvements legaux possibles pour un joueur
+	 * @param player Le joueur a considerer
+	 * @return le nombre de mouvements possibles
+	 * @author Valentin
+	 */
+	public int getLegalMoveCount(IPlayer player){
+		ArrayList<Cell> result = new ArrayList<Cell>();
+		for (int i = 0; i < BOARD_SIZE; i++) {
+        	for (int j = 0; j < BOARD_SIZE; j++) {
+        		if (_cells[j][i].getPiece() != null && _cells[j][i].getPiece().getOwner() == player)
+        			result.addAll(_cells[j][i].getPiece().getPossibleDestinations(this));
+        	}
+		}
+		return result.size();
+	}
+	
+	/**
+	 * Recupere une cellule dans une direction donnee, à une distance donnee
+	 * @param from cellule de depart
+	 * @param direction direction dans lequelle chercher la cellule
+	 * @param step distance a parcourir
+	 * @return La cellule cherchee si elle est dans le plateau, null sinon
+	 * @throws Exception si direction inconnue
+	 * @author Valentin
+	 */
 	public Cell getCellInDirection(Cell from, DirectionsEnum direction, int step) throws Exception
     {
         Cell cell;

@@ -18,6 +18,10 @@ public class Model {
 		return _secondPlayer;
 	}
 	
+	/**
+	 * Recupere le joueur en train de joueur
+	 * @return le joueur dont c'est le tour actuellement
+	 */
 	public IPlayer getCurrentPlayer(){
 		if (_firstPlayer.isPlaying())
 			return _firstPlayer;
@@ -25,6 +29,9 @@ public class Model {
 			return _secondPlayer;
 	}
 	
+	/**
+	 * Effectue le changement de tour entre le joueur 1 et le joueur 2
+	 */
 	public void switchTurn(){
 		if (_firstPlayer.isPlaying()){
 			System.out.println("Player one ended playing, switching to player two");
