@@ -17,8 +17,6 @@ public class Pawn extends Piece {
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
-		//result.add()
-		// TODO Auto-generated method stub
 		
 		try {
 			if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece() == null ) 
@@ -36,18 +34,20 @@ public class Pawn extends Piece {
 				result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1));
 		}
 		catch (Exception e)
-		{}
+		{
+			e.printStackTrace();
+		}
 		return result;
 	}
 
 	@Override
 	public String getIconPath() {
 		if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer()) 
-			return "chess_resources\\" + "pawn_black.png";
+			return "/pawn_black.png";
 		else 
-			return "chess_resources\\" + "pawn_white.png";
+			return "/pawn_white.png";
 	}
-	// in main, add : pawn.cellInit()
+
 	public Cell cellInit() {
 		Cell init = this.getCell();
 		return init;

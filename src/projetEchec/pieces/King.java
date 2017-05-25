@@ -39,9 +39,9 @@ public class King extends Piece {
 	@Override
 	public String getIconPath() {
 		if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer()) 
-			return "chess_resources" + "king_black.png";
+			return "/king_black.png";
 		else 
-			return "chess_resources" + "king_white.png";
+			return "/king_white.png";
 		
 	}
 

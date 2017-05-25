@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -56,27 +58,29 @@ public class Cell extends JLabel implements MouseListener {
 	}
 	
 	public void setPiece(Piece piece){
-		if (_piece != null)
+		if (_piece != piece)
 		{
-			_piece.setCell(null);
+			setOpaque(true);
+			setIcon(null);
+			revalidate();
+			_board.clearHighlights();
 		}
 		_piece = piece;
 		if (_piece != null)
 		{
 			_piece.setCell(this);
 			String path = _piece.getIconPath();
+			
 			setText(_piece.getClass().getSimpleName());
 			if (path != null){
+				URL imageUrl = this.getClass().getResource(path);
+				setText(null);
 				setOpaque(false);
-				setIcon(new ImageIcon());
+				setIcon(new ImageIcon(imageUrl, "test"));
+				revalidate();
 			}
 		}	
-		else if (_piece != piece)
-		{
-			setOpaque(false);
-			setIcon(null);
-			revalidate();
-		}
+		
 	}
 	
 	public void highlight() {
@@ -85,18 +89,26 @@ public class Cell extends JLabel implements MouseListener {
 			setBorder(_hightlightBorder);
 		else
 			setBorder(_emptyBorder);
+		revalidate();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse clicked on " + this.toString());
-		highlight();
-		if (_piece != null)
+		if (_piece != null && _piece.getOwner().isPlaying())
 		{
 			for (Cell cell: _piece.getPossibleDestinations(_board)) {
 				 cell.highlight();
 			}
 		}
+		
+		
+		if (_highlighted && _piece == null)
+		{
+			_board.getHighlightedPiece(MainWindow.getInstance().getModel().getCurrentPlayer()).moveTo(this);
+		}
+		else
+			highlight();
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class Program {
 		window.pack();
 		window.setMinimumSize(window.getSize());
 		window.setVisible(true);
-		JOptionPane.showMessageDialog(window, "Bienvenue dans Projet Echec, pour commencer la partie, cliquez sur une pièce du camp de votre choix");
+		JOptionPane.showMessageDialog(window, "Bienvenue dans Projet Echec, pour commencer la partie, cliquez sur une pièce du camp noir");
 	}
 
 }

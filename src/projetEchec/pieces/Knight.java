@@ -53,9 +53,9 @@ public class Knight extends Piece {
 	@Override
 	public String getIconPath() {
 		if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer())  
-			return "chess_resources" + "knight_black.png";
+			return "/knight_black.png";
 		else 
-			return "chess_resources" + "knight_white.png";
+			return "/knight_white.png";
 		
 	}
 

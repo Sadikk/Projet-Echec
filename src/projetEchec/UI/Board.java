@@ -3,6 +3,7 @@ package projetEchec.UI;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
+import projetEchec.IPlayer;
 import projetEchec.Model;
 import projetEchec.pieces.*;
 
@@ -68,6 +69,25 @@ public class Board extends JPanel{
 				&& y < BOARD_SIZE && y >= 0;
 	}
 	
+	public void clearHighlights(){
+		for (int i = 0; i < BOARD_SIZE; i++) {
+        	for (int j = 0; j < BOARD_SIZE; j++) {
+        		if (_cells[j][i].getHighlighted())
+        			_cells[j][i].highlight();
+        	}
+		}
+	}
+	
+	public Piece getHighlightedPiece(IPlayer owner){
+		for (int i = 0; i < BOARD_SIZE; i++) {
+        	for (int j = 0; j < BOARD_SIZE; j++) {
+        		if (_cells[j][i].getPiece() != null && _cells[j][i].getPiece().getOwner() == owner &&_cells[j][i].getHighlighted())
+        			return _cells[j][i].getPiece();
+        	}
+		}
+		return null;
+	}
+	
 	public Cell getCellInDirection(Cell from, DirectionsEnum direction, int step) throws Exception
     {
         Cell cell;
@@ -77,48 +97,47 @@ public class Board extends JPanel{
         {
             case DIRECTION_EAST:
                 {
-                	cell = new Cell(X + step, Y + step, this);
+                	cell = getCell(X + step, Y);
                     break;
                 }
             case DIRECTION_SOUTH_EAST:
                 {
-                	cell = new Cell(X + step, Y, this);
+                	cell = getCell(X + step, Y + step);
                     break;
                 }
             case DIRECTION_SOUTH:
                 {
-                	cell = new Cell(X + step, Y - step, this);
+                	cell = getCell(X, Y + step);
                     break;
                 }
             case DIRECTION_SOUTH_WEST:
                 {
-                	cell = new Cell(X, Y - step, this);
+                	cell = getCell(X - step, Y + step);
                     break;
                 }
             case DIRECTION_WEST:
                 {
-                	cell = new Cell(X - step, Y - step, this);
+                	cell = getCell(X - step, Y);
                     break;
                 }
             case DIRECTION_NORTH_WEST:
                 {
-                	cell = new Cell(X - step, Y, this);
+                	cell = getCell(X - step, Y - step);
                     break;
                 }
             case DIRECTION_NORTH:
                 {
-                	cell = new Cell(X - step, Y + step, this);
+                	cell = getCell(X, Y - step);
                     break;
                 }
             case DIRECTION_NORTH_EAST:
                 {
-                	cell = new Cell(X, Y + step, this);
+                	cell = getCell(X + step, Y - step);
                     break;
                 }
             default:
                 throw new Exception("Unknown direction : " + direction);
         }
-
         return cell;
     }
 }
