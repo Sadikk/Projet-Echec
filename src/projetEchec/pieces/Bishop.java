@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import projetEchec.IPlayer;
 import projetEchec.UI.Board;
 import projetEchec.UI.Cell;
+import projetEchec.UI.MainWindow;
 
 public class Bishop extends Piece {
 
@@ -20,8 +21,11 @@ public class Bishop extends Piece {
 
 	@Override
 	public String getIconPath() {
-		// TODO Auto-generated method stub 
-		return null;
+		if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer())  
+			return "/bishop_black.png";
+		else 
+			return "/bishop_white.png";
+		
 	}
 
 }
