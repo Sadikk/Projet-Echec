@@ -16,7 +16,7 @@ public class King extends Piece {
 	
 	// TODO Auto-generated method stub
 	// Rock's problem, implement it or not ? 
-	// Limit board?
+	
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
@@ -31,7 +31,16 @@ public class King extends Piece {
 				e.printStackTrace();
 			}
 		}
-
+		// Use only one between 2nd and 3rd condition
+		/*Roque 1st player
+		if (getInitCell() == true && board.getCell(7,0).getPiece().getInitCell() == true && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 3).getPiece() == Rook(MainWindow.getInstance().getModel().getFirstPlayer()) && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2 ).getPiece() == null && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 1).getPiece() == null)
+				result.add (board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2));
+		*/
+		//Roque 2nd player
+			/*
+			 * if (getInitCell() == true && board.getCell(0,7).getPiece().getInitCell() == true && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 3).getPiece() == Rook(MainWindow.getInstance().getModel().getSecondPlayer()) && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 2 ).getPiece() == null && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 1).getPiece() == null)
+				result.add (board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2));
+			 */
 		return result;
 	}
 
@@ -44,5 +53,4 @@ public class King extends Piece {
 			return "/king_white.png";
 		
 	}
-
 }

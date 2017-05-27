@@ -42,12 +42,20 @@ public abstract class Piece {
 	/**
 	 * Effectue le mouvement de la pièce et passe au tour suivant
 	 * @param cell cellule de destination de la pièce
+	 * signale que la piece a quitté sa position initiale
 	 */
 	public void moveTo(Cell cell){
 		_cell.setPiece(null);
 		setCell(cell);
 		_cell.setPiece(this);
 		MainWindow.getInstance().getModel().switchTurn();
+		_initCell = false;
 	}
 		
+	private boolean _initCell = true;
+	
+	public boolean getInitCell() {
+		return _initCell;
+	}
+	
 }

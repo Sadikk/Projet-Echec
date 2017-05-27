@@ -15,23 +15,43 @@ public class Pawn extends Piece {
 	}
 
 	@Override
+	/**
+	 *Liste les possibilités de déplacement en fonction de la situation du pion
+	 * @param board Plateau 
+	 * @return la liste de solutions
+	 * @author Mathieu
+	 */
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		
 		try {
-			if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece() == null ) 
-				result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1));
+			if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer()){
+				
+				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece() == null) 
+					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1));
 			
-			// Add 1st round ==> Dans le jeu, mettre au début (initialisation de cellInit();
-			if (this.getCell() == cellInit() && (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 2).getPiece() == null))
+				if (this.getInitCell() == true && (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 2).getPiece() == null))
 					result.add(board.getCellInDirection(this.getCell(),  DirectionsEnum.DIRECTION_NORTH, 2)); 
 					
-			// manger:
-			if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-				result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
+					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1));
 			
-			if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner() )
-				result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner() )
+					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+			}
+			else {
+				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1).getPiece() == null ) 
+					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1));
+				
+				if (this.getInitCell()== true && (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 2).getPiece() == null))
+					result.add(board.getCellInDirection(this.getCell(),  DirectionsEnum.DIRECTION_SOUTH, 2));
+				
+				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
+					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
+			
+				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner() )
+					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+			}
 		}
 		catch (Exception e)
 		{
@@ -47,10 +67,4 @@ public class Pawn extends Piece {
 		else 
 			return "/pawn_white.png";
 	}
-
-	public Cell cellInit() {
-		Cell init = this.getCell();
-		return init;
-	}
-
 }
