@@ -20,28 +20,45 @@ public class King extends Piece {
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
-		
+		try {
 		for (DirectionsEnum dir : DirectionsEnum.values()) {
-			try {
-				if(board.getCellInDirection(this.getCell(),dir, 1).getPiece() == null || board.getCellInDirection(this.getCell(),dir, 1).getPiece().getOwner() != this.getOwner() )
-					
+			
+				
+			Cell cellDirection = board.getCellInDirection(this.getCell(),dir, 1);
+			
+				if(cellDirection.getPiece() == null || cellDirection.getPiece().getOwner() != this.getOwner())
 					result.add(board.getCellInDirection(this.getCell(),dir, 1));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				
+			
 		}
-		// Use only one between 2nd and 3rd condition
-		/*Roque 1st player
-		if (getInitCell() == true && board.getCell(7,0).getPiece().getInitCell() == true && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 3).getPiece() == Rook(MainWindow.getInstance().getModel().getFirstPlayer()) && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2 ).getPiece() == null && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 1).getPiece() == null)
-				result.add (board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2));
-		*/
-		//Roque 2nd player
-			/*
-			 * if (getInitCell() == true && board.getCell(0,7).getPiece().getInitCell() == true && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 3).getPiece() == Rook(MainWindow.getInstance().getModel().getSecondPlayer()) && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 2 ).getPiece() == null && board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_WEST, 1).getPiece() == null)
-				result.add (board.getCellInDirection(getCell(), DirectionsEnum.DIRECTION_EAST, 2));
-			 */
+		
+		IPlayer firstPlayer = MainWindow.getInstance().getModel().getFirstPlayer();
+		
+		if (getInitCell() == true && this.getOwner() == firstPlayer ) {
+			Cell cellKnight = board.getCell(6,0);
+			Cell cellBishop = board.getCell(5,0);
+			Cell cellRook = board.getCell(7,0);
+		
+			if (cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true
+					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
+				result.add (cellKnight);
+		}
+		else {
+			
+			Cell cellKnight = board.getCell(1,7);
+			Cell cellBishop = board.getCell(2,7);
+			Cell cellRook = board.getCell(0,7);
+			
+			if (getInitCell() == true && cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true
+					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
+				result.add (cellKnight);
+		}
 		return result;
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return result;
+	}
 	}
 
 

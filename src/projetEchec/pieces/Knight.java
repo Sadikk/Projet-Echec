@@ -17,32 +17,46 @@ public class Knight extends Piece {
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		// TODO Auto-generated method stub
-		// Knight black don't work
+		// Knights black&white don't work
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		try {
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
+			
+			Cell cellSouth = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1);
+			Cell cellNorth = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1);
+			Cell cellWest = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1);
+			Cell cellEast = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1);
+			
+		if (board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null ||
+				board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+		if ( board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null ||
+				board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
+		if ( board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null ||
+				board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+		if ( board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null ||
+				board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+		if ( board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null ||
+				board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+		if ( board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null ||
+				board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+		if ( board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null ||
+				board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1));
 		
-		if ( board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null || board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1), DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+		if ( board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null ||
+				board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
+			result.add(board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1));
 		
 		}
 		catch (Exception e)

@@ -27,30 +27,41 @@ public class Pawn extends Piece {
 		try {
 			if (getOwner() == MainWindow.getInstance().getModel().getSecondPlayer()){
 				
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece() == null) 
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1));
+				Cell cellNorth = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1);
+				Cell cellNorthRank2 = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 2);
+				Cell cellNorthWest = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1);
+				Cell cellNorthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1);
+				
+				if (cellNorth.getPiece() == null) 
+					result.add(cellNorth);
 			
-				if (this.getInitCell() == true && (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 2).getPiece() == null))
-					result.add(board.getCellInDirection(this.getCell(),  DirectionsEnum.DIRECTION_NORTH, 2)); 
+				if (this.getInitCell() == true && cellNorthRank2.getPiece() == null && cellNorth.getPiece() == null)
+					result.add(cellNorthRank2); 
 					
-				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+				if (cellNorthWest.getPiece() != null && cellNorthWest.getPiece().getOwner() != this.getOwner() )
+					result.add(cellNorthWest);
 			
-				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+				if (cellNorthEast.getPiece() != null && cellNorthEast.getPiece().getOwner() != this.getOwner() )
+					result.add(cellNorthEast);
 			}
 			else {
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1).getPiece() == null ) 
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1));
 				
-				if (this.getInitCell()== true && (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 2).getPiece() == null))
+				Cell cellSouth = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1);
+				Cell cellSouth2=board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 2);
+				Cell cellSouthWest = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1);
+				Cell cellSouthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_EAST, 1);
+				
+				if (cellSouth.getPiece() == null ) 
+					result.add(cellSouth);
+				
+				if (this.getInitCell()== true && cellSouth2.getPiece() == null && cellSouth.getPiece() == null)
 					result.add(board.getCellInDirection(this.getCell(),  DirectionsEnum.DIRECTION_SOUTH, 2));
 				
-				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
-			
-				if (board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+				if (cellSouthWest.getPiece() != null && cellSouthWest.getPiece().getOwner() != this.getOwner() )
+					result.add(cellSouthWest);
+				
+				if (cellSouthEast.getPiece() != null && cellSouthEast.getPiece().getOwner() != this.getOwner() )
+					result.add(cellSouthEast);
 			}
 		}
 		catch (Exception e)
