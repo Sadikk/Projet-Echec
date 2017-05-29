@@ -50,8 +50,8 @@ public class King extends Piece {
 					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
 				result.add (cellRook);
 			
-			if (cellGRook.getPiece() != null &&cellGRook.getPiece().getInitCell() == true
-					&& cellGKnight.getPiece() == null && cellGBishop.getPiece() == null && cellQueen == null)
+			if (cellGRook.getPiece() != null && cellGRook.getPiece().getInitCell() == true
+					&& cellGKnight.getPiece() == null && cellGBishop.getPiece() == null && cellQueen.getPiece() == null)
 				result.add (cellGRook);
 		}
 		else {
@@ -69,7 +69,7 @@ public class King extends Piece {
 				result.add (cellRook);
 				
 			if (getInitCell() == true && cellGRook.getPiece() != null && cellGRook.getPiece().getInitCell() == true &&
-					cellGKnight.getPiece() == null && cellGBishop.getPiece() == null && cellQueen == null)
+					cellGKnight.getPiece() == null && cellGBishop.getPiece() == null && cellQueen.getPiece() == null)
 				result.add (cellRook);
 		}
 		
