@@ -27,8 +27,8 @@ public class King extends Piece {
 				
 			Cell cellDirection = board.getCellInDirection(this.getCell(),dir, 1);
 			
-				if(cellDirection.getPiece() == null || 
-						(cellDirection.getPiece() != null && cellDirection.getPiece().getOwner() != this.getOwner()))
+				if(cellDirection != null && (cellDirection.getPiece() == null || 
+						(cellDirection.getPiece() != null && cellDirection.getPiece().getOwner() != this.getOwner())))
 					result.add(cellDirection);
 				
 			
@@ -51,17 +51,17 @@ public class King extends Piece {
 			Cell cellBishop = board.getCell(2,7);
 			Cell cellRook = board.getCell(0,7);
 			
-			if (getInitCell() == true && cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true
-					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
+			if (getInitCell() == true && cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true &&
+					cellKnight.getPiece() == null && cellBishop.getPiece() == null)
 				result.add (cellKnight);
 		}
 		
 		return result;
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
-		return result;
 	}
+		return result;
+	
 	}
 
 
