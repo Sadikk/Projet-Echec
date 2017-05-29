@@ -43,7 +43,7 @@ public class King extends Piece {
 		
 			if (cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true
 					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
-				result.add (cellKnight);
+				result.add (cellRook);
 		}
 		else {
 			
@@ -53,7 +53,8 @@ public class King extends Piece {
 			
 			if (getInitCell() == true && cellRook.getPiece() != null && cellRook.getPiece().getInitCell() == true &&
 					cellKnight.getPiece() == null && cellBishop.getPiece() == null)
-				result.add (cellKnight);
+				result.add (cellRook);
+				
 		}
 		
 		return result;
@@ -61,9 +62,7 @@ public class King extends Piece {
 		e.printStackTrace();
 	}
 		return result;
-	
 	}
-
 
 	@Override
 	public String getIconPath() {
