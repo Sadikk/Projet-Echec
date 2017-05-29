@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import projetEchec.pieces.King;
 import projetEchec.pieces.Piece;
+import projetEchec.pieces.Rook;
 
 public class Cell extends JLabel implements MouseListener {
 	final static Border _hightlightBorder = BorderFactory.createLineBorder(Color.BLUE, 5);
@@ -95,7 +98,32 @@ public class Cell extends JLabel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse clicked on " + this.toString());
 		
-		if (_piece != null && _piece.getOwner().isPlaying())
+		ArrayList<Piece> movingPieces = _board.getHighlightedPieces(MainWindow.getInstance().getModel().getCurrentPlayer());
+		Piece movingPiece = movingPieces.isEmpty() ? null : movingPieces.get(0);
+		
+		//todo castling management is quite chaotic, we could improve it
+		if (_piece != null && _piece instanceof Rook && _highlighted && movingPiece != null
+				&& _piece.getOwner() == MainWindow.getInstance().getModel().getCurrentPlayer()
+				&& movingPieces.get(1) != null && (movingPieces.get(1) instanceof King || movingPieces.get(1) instanceof Rook)
+				&& movingPieces.get(1).getOwner() == MainWindow.getInstance().getModel().getCurrentPlayer())
+		{
+			System.out.println("Roque : moving piece is " + movingPiece.getClass().getName());
+			Piece other = movingPieces.get(1);
+			//small castling
+			if ((movingPiece instanceof King && movingPiece.getCell().getCellY() < 4)
+					|| (movingPiece instanceof Rook && movingPiece.getCell().getCellY() > 4)){
+					movingPiece.moveTo(_board.getCell(movingPiece.getCell().getCellX() + 2, movingPiece.getCell().getCellY()));
+					other.moveTo(_board.getCell(other.getCell().getCellX() - 2, other.getCell().getCellY()));
+			} //large castling
+			else if (((movingPiece instanceof King && movingPiece.getCell().getCellY() < 4)
+					|| (movingPiece instanceof Rook && movingPiece.getCell().getCellY() > 4)))
+			{
+				movingPiece.moveTo(_board.getCell(movingPiece.getCell().getCellX() + 3, movingPiece.getCell().getCellY()));
+				other.moveTo(_board.getCell(other.getCell().getCellX() - 2, other.getCell().getCellY()));
+			}
+			MainWindow.getInstance().getModel().switchTurn();
+		}
+		else if (_piece != null && _piece.getOwner().isPlaying())
 		{
 			_board.clearHighlights();
 			for (Cell cell: _piece.getPossibleDestinations(_board)) {
@@ -103,10 +131,11 @@ public class Cell extends JLabel implements MouseListener {
 			}
 			highlight();
 		}
+		
 				
 		if (_highlighted && (_piece == null || _piece.getOwner() != MainWindow.getInstance().getModel().getCurrentPlayer()))
 		{
-			Piece movingPiece = _board.getHighlightedPiece(MainWindow.getInstance().getModel().getCurrentPlayer());
+			
 			if (movingPiece != null)
 				movingPiece.moveTo(this);
 			
