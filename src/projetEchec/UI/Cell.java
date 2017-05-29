@@ -94,20 +94,25 @@ public class Cell extends JLabel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse clicked on " + this.toString());
+		
 		if (_piece != null && _piece.getOwner().isPlaying())
 		{
+			_board.clearHighlights();
 			for (Cell cell: _piece.getPossibleDestinations(_board)) {
 				 cell.highlight();
 			}
-		}
-		
-		
-		if (_highlighted && _piece == null)
-		{
-			_board.getHighlightedPiece(MainWindow.getInstance().getModel().getCurrentPlayer()).moveTo(this);
-		}
-		else
 			highlight();
+		}
+				
+		if (_highlighted && (_piece == null || _piece.getOwner() != MainWindow.getInstance().getModel().getCurrentPlayer()))
+		{
+			Piece movingPiece = _board.getHighlightedPiece(MainWindow.getInstance().getModel().getCurrentPlayer());
+			if (movingPiece != null)
+				movingPiece.moveTo(this);
+			
+		}
+		if (_piece == null && !_highlighted)
+			_board.clearHighlights();		
 	}
 
 	@Override

@@ -7,7 +7,7 @@ public class Model {
 	public Model() {
 		_firstPlayer = new HumanPlayer();
 		_secondPlayer = new HumanPlayer();
-		_secondPlayer.play();
+		_firstPlayer.play();
 	}
 	
 	public IPlayer getFirstPlayer(){
