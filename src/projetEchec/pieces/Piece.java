@@ -2,6 +2,8 @@ package projetEchec.pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import projetEchec.IPlayer;
 import projetEchec.UI.Board;
 import projetEchec.UI.Cell;
@@ -45,11 +47,14 @@ public abstract class Piece {
 	 * signale que la piece a quitté sa position initiale
 	 */
 	public void moveTo(Cell cell){
+		boolean ended = cell.getPiece() != null && cell.getPiece() instanceof King;
 		_cell.setPiece(null);
 		setCell(cell);
 		_cell.setPiece(this);
 		MainWindow.getInstance().getModel().switchTurn();
 		_initCell = false;
+		if (ended)
+			JOptionPane.showMessageDialog(MainWindow.getInstance(), "Le roi a été mangé, fin de la partie !");
 	}
 		
 	private boolean _initCell = true;
