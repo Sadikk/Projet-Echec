@@ -21,17 +21,19 @@ public class King extends Piece {
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		try {
+			
 		for (DirectionsEnum dir : DirectionsEnum.values()) {
 			
 				
 			Cell cellDirection = board.getCellInDirection(this.getCell(),dir, 1);
 			
-				if(cellDirection.getPiece() == null || cellDirection.getPiece().getOwner() != this.getOwner())
-					result.add(board.getCellInDirection(this.getCell(),dir, 1));
+				if(cellDirection.getPiece() == null || 
+						(cellDirection.getPiece() != null && cellDirection.getPiece().getOwner() != this.getOwner()))
+					result.add(cellDirection);
 				
 			
 		}
-		
+		// Roque 
 		IPlayer firstPlayer = MainWindow.getInstance().getModel().getFirstPlayer();
 		
 		if (getInitCell() == true && this.getOwner() == firstPlayer ) {
@@ -53,6 +55,7 @@ public class King extends Piece {
 					&& cellKnight.getPiece() == null && cellBishop.getPiece() == null)
 				result.add (cellKnight);
 		}
+		
 		return result;
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
