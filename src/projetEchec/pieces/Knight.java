@@ -26,37 +26,45 @@ public class Knight extends Piece {
 			Cell cellWest = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1);
 			Cell cellEast = board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1);
 			
-		if (board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null ||
-				board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
+		Cell cellSouthWest = board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_WEST, 1);
 		
-		if ( board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null ||
-				board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+		if (cellSouthWest.getPiece() == null || cellSouthWest.getPiece().getOwner() != this.getOwner())
+			result.add(cellSouthWest);
 		
-		if ( board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece() == null ||
-				board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
+		Cell cellSouthEast = board.getCellInDirection(cellSouth, DirectionsEnum.DIRECTION_SOUTH_EAST, 1);
 		
-		if ( board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null ||
-				board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+		if (cellSouthEast.getPiece() == null || cellSouthEast.getPiece().getOwner() != this.getOwner())
+			result.add(cellSouthEast);
 		
-		if ( board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece() == null ||
-				board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1));
+		Cell cellWestSouth = board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_SOUTH_WEST, 1);
 		
-		if ( board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null ||
-				board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+		if ( cellWestSouth.getPiece() == null || cellWestSouth.getPiece().getOwner() != this.getOwner())
+			result.add(cellWestSouth);
 		
-		if ( board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece() == null ||
-				board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+		Cell cellWestNorth =  board.getCellInDirection(cellWest, DirectionsEnum.DIRECTION_NORTH_WEST, 1);
 		
-		if ( board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece() == null ||
-				board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner())
-			result.add(board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+		if ( cellWestNorth.getPiece() == null || cellWestNorth.getPiece().getOwner() != this.getOwner())
+			result.add(cellWestNorth);
+		
+		Cell cellEastSouth =  board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_SOUTH_EAST, 1);
+		
+		if ( cellEastSouth.getPiece() == null || cellEastSouth.getPiece().getOwner() != this.getOwner())
+			result.add(cellEastSouth);
+		
+		Cell cellEastNorth = board.getCellInDirection(cellEast, DirectionsEnum.DIRECTION_NORTH_EAST, 1);
+		
+		if ( cellEastNorth.getPiece() == null || cellEastNorth.getPiece().getOwner() != this.getOwner())
+			result.add(cellEastNorth);
+		
+		Cell cellNorthWest = board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_WEST, 1);
+		
+		if ( cellNorthWest.getPiece() == null || cellNorthWest.getPiece().getOwner() != this.getOwner())
+			result.add(cellNorthWest);
+		
+		Cell cellNorthEast = board.getCellInDirection(cellNorth, DirectionsEnum.DIRECTION_NORTH_EAST, 1);
+		
+		if ( cellNorthEast.getPiece() == null || cellNorthEast.getPiece().getOwner() != this.getOwner())
+			result.add(cellNorthEast);
 		
 		}
 		catch (Exception e)
