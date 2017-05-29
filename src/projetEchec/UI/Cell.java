@@ -98,29 +98,18 @@ public class Cell extends JLabel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse clicked on " + this.toString());
 		
-		ArrayList<Piece> movingPieces = _board.getHighlightedPieces(MainWindow.getInstance().getModel().getCurrentPlayer());
-		Piece movingPiece = movingPieces.isEmpty() ? null : movingPieces.get(0);
+		Piece movingPiece = _board.getHighlightedPiece(MainWindow.getInstance().getModel().getCurrentPlayer());
 		
 		//todo castling management is quite chaotic, we could improve it
 		if (_piece != null && _piece instanceof Rook && _highlighted && movingPiece != null
 				&& _piece.getOwner() == MainWindow.getInstance().getModel().getCurrentPlayer()
-				&& movingPieces.get(1) != null && (movingPieces.get(1) instanceof King || movingPieces.get(1) instanceof Rook)
-				&& movingPieces.get(1).getOwner() == MainWindow.getInstance().getModel().getCurrentPlayer())
+				&& movingPiece != null && movingPiece instanceof King
+				&& movingPiece.getOwner() == MainWindow.getInstance().getModel().getCurrentPlayer())
 		{
-			System.out.println("Roque : moving piece is " + movingPiece.getClass().getName());
-			Piece other = movingPieces.get(1);
-			//small castling
-			if ((movingPiece instanceof King && movingPiece.getCell().getCellY() < 4)
-					|| (movingPiece instanceof Rook && movingPiece.getCell().getCellY() > 4)){
-					movingPiece.moveTo(_board.getCell(movingPiece.getCell().getCellX() + 2, movingPiece.getCell().getCellY()));
-					other.moveTo(_board.getCell(other.getCell().getCellX() - 2, other.getCell().getCellY()));
-			} //large castling
-			else if (((movingPiece instanceof King && movingPiece.getCell().getCellY() < 4)
-					|| (movingPiece instanceof Rook && movingPiece.getCell().getCellY() > 4)))
-			{
-				movingPiece.moveTo(_board.getCell(movingPiece.getCell().getCellX() + 3, movingPiece.getCell().getCellY()));
-				other.moveTo(_board.getCell(other.getCell().getCellX() - 2, other.getCell().getCellY()));
-			}
+			int rookOffset = _x == 0 ? 3 : -2; //large castling/small castling
+			int kingOffset = _x == 0 ? -2 : 2;
+			movingPiece.moveTo(_board.getCell(movingPiece.getCell().getCellX() + kingOffset, movingPiece.getCell().getCellY()));
+			_piece.moveTo(_board.getCell(_piece.getCell().getCellX() + rookOffset, _piece.getCell().getCellY()));
 			MainWindow.getInstance().getModel().switchTurn();
 		}
 		else if (_piece != null && _piece.getOwner().isPlaying())

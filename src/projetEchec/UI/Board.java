@@ -44,30 +44,21 @@ public class Board extends JPanel{
 		
 		// piece J2 rank 8 
 		getCell(0, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
-<<<<<<< HEAD
-		//getCell(1, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
-		//getCell(2, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
-		getCell(3, 7).setPiece(new King(MainWindow.getInstance().getModel().getSecondPlayer()));
-		getCell(4, 7).setPiece(new Queen(MainWindow.getInstance().getModel().getSecondPlayer()));
-		//getCell(5, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
-		//getCell(6, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
-=======
 		getCell(1, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(2, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(3, 7).setPiece(new Queen(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(4, 7).setPiece(new King(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(5, 7).setPiece(new Bishop(MainWindow.getInstance().getModel().getSecondPlayer()));
 		getCell(6, 7).setPiece(new Knight(MainWindow.getInstance().getModel().getSecondPlayer()));
->>>>>>> 1a9ba0e0fd344b3be2877b2f3ed76c6abeb54458
 		getCell(7, 7).setPiece(new Rook(MainWindow.getInstance().getModel().getSecondPlayer()));
 		
 		getCell(0, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
-		//getCell(1, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
-		//getCell(2, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(1, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(2, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(3, 0).setPiece(new Queen(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(4, 0).setPiece(new King(MainWindow.getInstance().getModel().getFirstPlayer()));
-		//getCell(5, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
-		//getCell(6, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(5, 0).setPiece(new Bishop(MainWindow.getInstance().getModel().getFirstPlayer()));
+		getCell(6, 0).setPiece(new Knight(MainWindow.getInstance().getModel().getFirstPlayer()));
 		getCell(7, 0).setPiece(new Rook(MainWindow.getInstance().getModel().getFirstPlayer()));
 	}
 	
@@ -116,7 +107,7 @@ public class Board extends JPanel{
 	 * @return la pièce selectionnée
 	 * @author Valentin
 	 */
-	public ArrayList<Piece> getHighlightedPieces(IPlayer owner){
+	public Piece getHighlightedPiece(IPlayer owner){
 		ArrayList<Piece> pieces = new ArrayList<Piece>();
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
@@ -124,7 +115,9 @@ public class Board extends JPanel{
         			pieces.add(_cells[j][i].getPiece());
         	}
 		}
-		return pieces;
+		if (pieces.size() > 1) //castling
+			pieces.removeIf(p -> !(p instanceof King));
+		return pieces.isEmpty() ? null : pieces.get(0);
 	}
 	
 	/**
