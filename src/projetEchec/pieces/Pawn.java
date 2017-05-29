@@ -15,12 +15,7 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	/**
-	 *Liste les possibilités de déplacement en fonction de la situation du pion
-	 * @param board Plateau 
-	 * @return la liste de solutions
-	 * @author Mathieu
-	 */
+	
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		
