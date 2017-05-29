@@ -70,7 +70,7 @@ public class King extends Piece {
 				
 			if (getInitCell() == true && cellGRook.getPiece() != null && cellGRook.getPiece().getInitCell() == true &&
 					cellGKnight.getPiece() == null && cellGBishop.getPiece() == null && cellQueen.getPiece() == null)
-				result.add (cellRook);
+				result.add (cellGRook);
 		}
 		
 		
