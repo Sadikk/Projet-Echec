@@ -22,17 +22,27 @@ public class Rook extends Piece {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		{
 			try {
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1));
+				DirectionsEnum [] directionsRook = new DirectionsEnum[] {
+						DirectionsEnum.DIRECTION_NORTH,	
+						DirectionsEnum.DIRECTION_WEST,
+						DirectionsEnum.DIRECTION_SOUTH,
+						DirectionsEnum.DIRECTION_EAST};
 				
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1));
+				for (DirectionsEnum dir : directionsRook) {
+					int i = 1;
+					Cell cell = board.getCellInDirection(this.getCell(), dir, i);
+					while (cell != null && cell.getPiece() == null)
+					{
+						result.add(cell);
+						i++;
+						cell = board.getCellInDirection(this.getCell(), dir, i);
+					}
 				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1));
+					//pour manger
+					if (cell != null && cell.getPiece() != null && cell.getPiece().getOwner() != this.getOwner()) {
+						result.add(cell);
+					}
+				}
 			}
 				catch (Exception e)
 				{}

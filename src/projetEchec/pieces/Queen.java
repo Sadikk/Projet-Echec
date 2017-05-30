@@ -21,37 +21,28 @@ public class Queen extends Piece {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		{
 			try {
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH, 1));
-				
-				if (board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_WEST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_EAST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_EAST, 8).getPiece() == null || board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner()  )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_EAST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
-				
-				}
-				catch (Exception e)
-				{}
-				
-		return result;
+					for (DirectionsEnum dir : DirectionsEnum.values()){
+						int i = 1;
+						Cell cell = board.getCellInDirection(this.getCell(), dir, i);
+						while (cell != null && cell.getPiece() == null)
+						{
+							result.add(cell);
+							i++;
+							cell = board.getCellInDirection(this.getCell(), dir, i);
+						}
+						
+						//pour manger
+						if (cell != null && cell.getPiece() != null && cell.getPiece().getOwner() != this.getOwner()) {
+							result.add(cell);
+						}
+					}
 			}
-		
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return result;
+		}
 	}
 
 	@Override
