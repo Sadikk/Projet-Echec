@@ -1,5 +1,7 @@
 package projetEchec;
 
+import java.util.ArrayList;
+
 import projetEchec.UI.Board;
 import projetEchec.pieces.Pawn;
 import projetEchec.pieces.Piece;
@@ -43,8 +45,9 @@ public class Model {
 	 * Effectue le changement de tour entre le joueur 1 et le joueur 2
 	 */
 	public void switchTurn(){
-		for (Piece p : _board.getPieces(Pawn.class, null))
-			((Pawn)p).setPriseEnPassant(false);
+		ArrayList<Piece> pieces = _board.getPieces(Pawn.class, null);
+		for (Piece p : pieces)
+			((Pawn)p).setUseAcc(false);
 		
 		if (_firstPlayer.isPlaying()){
 			System.out.println("Player one ended playing, switching to player two");

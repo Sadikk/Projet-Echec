@@ -125,14 +125,14 @@ public class Board extends JPanel{
 	 * @param owner Propriétaire des pièces. si null, renvoie les pièces des deux joueurs
 	 * @return Liste de pièces
 	 */
-	public ArrayList<Piece> getPieces(Class<? extends Piece> type, IPlayer owner)
+	public ArrayList<Piece> getPieces(Class classFilter, IPlayer owner)
 	{
 		ArrayList<Piece> result = new ArrayList<Piece>();
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
-        		if (_cells[j][i].getPiece() != null && type.isInstance(_cells[j][i].getPiece().getClass()) 
-        				&& (_cells[j][i].getPiece().getOwner() == owner  || owner == null))
-        			result.add(_cells[i][j].getPiece());
+        		if (_cells[j][i].getPiece() != null && classFilter.isInstance(_cells[j][i].getPiece()) && 
+        				(_cells[j][i].getPiece().getOwner() == owner  || owner == null))
+        			result.add(_cells[j][i].getPiece());
         	}
 		}
 		return result;
