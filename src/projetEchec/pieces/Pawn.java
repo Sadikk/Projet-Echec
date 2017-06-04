@@ -85,6 +85,8 @@ public class Pawn extends Piece implements IMovementListener {
 	}
 	
 	public void positionChanged(Cell oldCell, Cell newCell){
-		
+			if (newCell.getCellY() == 0 || newCell.getCellY() == 7 ){
+				newCell.setPiece(new Queen(this.getOwner()));
+			}
 	}
 }
