@@ -8,10 +8,11 @@ import projetEchec.UI.Cell;
 import projetEchec.UI.DirectionsEnum;
 import projetEchec.UI.MainWindow;
 
-public class Pawn extends Piece {
+public class Pawn extends Piece implements IMovementListener {
 
 	public Pawn(IPlayer owner) {
 		super(owner);
+		addMovementListener(this);
 	}
 
 	@Override
@@ -81,5 +82,9 @@ public class Pawn extends Piece {
 			return "/pawn_black.png";
 		else 
 			return "/pawn_white.png";
+	}
+	
+	public void positionChanged(Cell oldCell, Cell newCell){
+		
 	}
 }
