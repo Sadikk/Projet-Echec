@@ -20,26 +20,35 @@ public class Bishop extends Piece {
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
-		{
 			try {
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_WEST, 1));
+				DirectionsEnum [] directionsBishop = new DirectionsEnum[] {DirectionsEnum.DIRECTION_NORTH_EAST,
+						DirectionsEnum.DIRECTION_NORTH_WEST,	
+						DirectionsEnum.DIRECTION_SOUTH_WEST,
+						DirectionsEnum.DIRECTION_SOUTH_EAST};
 				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_EAST, 8).getPiece() == null || board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1).getPiece().getOwner() != this.getOwner()  )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_NORTH_EAST, 1));
+				for (DirectionsEnum dir : directionsBishop) {
+					int i = 1;
+					Cell cell = board.getCellInDirection(this.getCell(), dir, i);
+					while (cell != null && cell.getPiece() == null)
+					{
+						result.add(cell);
+						i++;
+						cell = board.getCellInDirection(this.getCell(), dir, i);
+					}
 				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
-				
-				if ( board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 8).getPiece() == null || board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1).getPiece().getOwner() != this.getOwner() )
-					result.add(board.getCellInDirection(this.getCell(), DirectionsEnum.DIRECTION_SOUTH_WEST, 1));
-		
+					//pour manger
+					if (cell != null && cell.getPiece() != null && cell.getPiece().getOwner() != this.getOwner()) {
+						result.add(cell);
+					}
+				}
 			}
 			catch (Exception e)
-			{}
-		return result;
+			{
+				e.printStackTrace();
+			}
+			return result;
 		}
-	}
+	
 
 	@Override
 	public String getIconPath() {
