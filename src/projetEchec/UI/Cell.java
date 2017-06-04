@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import projetEchec.pieces.King;
+import projetEchec.pieces.Pawn;
 import projetEchec.pieces.Piece;
 import projetEchec.pieces.Rook;
 
@@ -127,6 +128,16 @@ public class Cell extends JLabel implements MouseListener {
 			
 			if (movingPiece != null)
 				movingPiece.moveTo(this);
+			if (movingPiece instanceof Pawn && ((Pawn)movingPiece).getPriseEnPassant()){
+				try {
+					_board.getCellInDirection(movingPiece.getCell(), 
+							movingPiece.getOwner() == MainWindow.getInstance().getModel().getFirstPlayer() ? DirectionsEnum.DIRECTION_NORTH : DirectionsEnum.DIRECTION_SOUTH
+									, 1).setPiece(null);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			
 		}
 		if (_piece == null && !_highlighted)

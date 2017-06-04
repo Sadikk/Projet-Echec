@@ -18,13 +18,12 @@ public class Board extends JPanel{
 	public Board() {
 		super();
         setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
-        initBoard();
 	}
 	
 	/**
 	 * Genere le plateau de jeu avec le placement initial des pieces
 	 */
-	private void initBoard(){
+	public void initBoard(){
 		//generating grid
 		for (int i = 0; i < BOARD_SIZE; i++) {
         	for (int j = 0; j < BOARD_SIZE; j++) {
@@ -118,6 +117,25 @@ public class Board extends JPanel{
 		if (pieces.size() > 1) //castling
 			pieces.removeIf(p -> !(p instanceof King));
 		return pieces.isEmpty() ? null : pieces.get(0);
+	}
+	
+	/**
+	 * Renvoie la liste des pièces d'un certain type d'un joueur
+	 * @param type Type de la pièce 
+	 * @param owner Propriétaire des pièces. si null, renvoie les pièces des deux joueurs
+	 * @return Liste de pièces
+	 */
+	public ArrayList<Piece> getPieces(Class<? extends Piece> type, IPlayer owner)
+	{
+		ArrayList<Piece> result = new ArrayList<Piece>();
+		for (int i = 0; i < BOARD_SIZE; i++) {
+        	for (int j = 0; j < BOARD_SIZE; j++) {
+        		if (_cells[j][i].getPiece() != null && type.isInstance(_cells[j][i].getPiece().getClass()) 
+        				&& (_cells[j][i].getPiece().getOwner() == owner  || owner == null))
+        			result.add(_cells[i][j].getPiece());
+        	}
+		}
+		return result;
 	}
 	
 	/**

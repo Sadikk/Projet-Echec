@@ -67,15 +67,7 @@ public abstract class Piece {
 		return _initCell;
 	}
 	
-	private boolean _useAcc = false;
 	
-	public boolean getUseAcc () {
-		return _useAcc ;
-	}
-	
-	public void setUseAcc() {
-		_useAcc = true;
-	}
 	
 	//observer pattern
 	private final EventListenerList _listeners = new EventListenerList();

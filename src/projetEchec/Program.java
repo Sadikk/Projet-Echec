@@ -8,8 +8,9 @@ import projetEchec.UI.MainWindow;
 public class Program {
 	
 	public static void main(String[] args) {
-		MainWindow window = MainWindow.getInstance();
-		window.setContentPane(new Board());
+		MainWindow window = MainWindow.getInstance();		
+		window.getModel().getBoard().initBoard();
+		window.setContentPane(window.getModel().getBoard());
 		window.pack();
 		window.setMinimumSize(window.getSize());
 		window.setVisible(true);

@@ -15,9 +15,10 @@ public class Pawn extends Piece implements IMovementListener {
 		addMovementListener(this);
 	}
 
-	boolean priseEnPassant = false;
-	@Override
 	
+	
+	
+	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
 		ArrayList<Cell> result = new ArrayList<Cell>();
 		
@@ -34,20 +35,20 @@ public class Pawn extends Piece implements IMovementListener {
 				Cell cellNorthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1);
 
 				 // prise en passant 
-				if (cellEast != null && cellEast.getPiece() != null && 
-						(cellEast.getPiece().getUseAcc() == true && 
+				if (cellEast != null && cellEast.getPiece() != null && cellEast.getPiece() instanceof Pawn &&
+						(((Pawn)cellEast.getPiece()).getUseAcc() == true && 
 						this.getCell().getCellY() == 3)) {
 				
 					result.add(cellNorthEast);
-					priseEnPassant = true;
+					_priseEnPassant = true;
 				}
 				
-				if (cellWest != null && cellWest.getPiece() != null &&
-						(cellWest.getPiece().getUseAcc() == true &&
+				if (cellWest != null && cellWest.getPiece() != null && cellWest.getPiece() instanceof Pawn &&
+						(((Pawn)cellWest.getPiece()).getUseAcc() == true &&
 						this.getCell().getCellY() == 3)){
 				
 					result.add(cellNorthWest);
-					priseEnPassant = true;
+					_priseEnPassant = true;
 				}
 				
 				if (cellNorth != null) {
@@ -76,18 +77,18 @@ public class Pawn extends Piece implements IMovementListener {
 				Cell cellSouthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_EAST, 1);
 				
 				// prise en passant 
-				if (cellEast != null && cellEast.getPiece() != null && 
-						(cellEast.getPiece().getUseAcc() == true && 
+				if (cellEast != null && cellEast.getPiece() != null && cellEast.getPiece() instanceof Pawn &&
+						(((Pawn)cellEast.getPiece()).getUseAcc() == true && 
 						this.getCell().getCellY() == 4 )) {
 					result.add(cellSouthEast);
-					priseEnPassant = true;
+					_priseEnPassant = true;
 				}
 				
-				if (cellWest != null && cellWest.getPiece() != null &&
-						(cellWest.getPiece().getUseAcc() == true && 
+				if (cellWest != null && cellWest.getPiece() != null && cellWest.getPiece() instanceof Pawn &&
+						(((Pawn)cellWest.getPiece()).getUseAcc() == true &&
 						this.getCell().getCellY() == 4)) {
 					result.add(cellSouthWest );
-					priseEnPassant = true;
+					_priseEnPassant = true;
 				}
 			
 				
@@ -124,14 +125,37 @@ public class Pawn extends Piece implements IMovementListener {
 			return "/pawn_white.png";
 	}
 	
+	private boolean _useAcc = false;
+	
+	public boolean getUseAcc () {
+		return _useAcc ;
+	}
+	
+	public void setUseAcc(boolean useAcc) {
+		_useAcc = useAcc;
+	}
+	
+	private boolean _priseEnPassant = false;
+	
+	public boolean getPriseEnPassant(){
+		return _priseEnPassant;
+	}
+	
+	public void setPriseEnPassant(boolean prise){
+		_priseEnPassant = prise;
+	}
+	
 
 	public void positionChanged(Cell oldCell, Cell newCell){		
 		if (Math.sqrt( Math.pow(newCell.getCellX() - oldCell.getCellX(),2)+ 
 				Math.pow(newCell.getCellY() - oldCell.getCellY(),2)) == 2) 
-			this.setUseAcc();
+			this.setUseAcc(true);
 		if (newCell.getCellY() == 0 || newCell.getCellY() == 7 ){
 			newCell.setPiece(new Queen(this.getOwner()));
 		}
 	}
+
+
+
 
 }
