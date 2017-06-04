@@ -8,12 +8,14 @@ import projetEchec.UI.Cell;
 import projetEchec.UI.DirectionsEnum;
 import projetEchec.UI.MainWindow;
 
-public class Pawn extends Piece {
+public class Pawn extends Piece implements IMovementListener {
 
 	public Pawn(IPlayer owner) {
 		super(owner);
+		addMovementListener(this);
 	}
 
+	boolean priseEnPassant = false;
 	@Override
 	
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
@@ -31,15 +33,22 @@ public class Pawn extends Piece {
 				Cell cellNorthWest = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_WEST, 1);
 				Cell cellNorthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_NORTH_EAST, 1);
 
-				/* prise en passant 
+				 // prise en passant 
 				if (cellEast != null && cellEast.getPiece() != null && 
-						(cellEast.getPiece().getUseAcc() == false && this.getCell().getCellY() == 3))
+						(cellEast.getPiece().getUseAcc() == true && 
+						this.getCell().getCellY() == 3)) {
+				
 					result.add(cellNorthEast);
+					priseEnPassant = true;
+				}
 				
 				if (cellWest != null && cellWest.getPiece() != null &&
-						(cellWest.getPiece().getUseAcc() == false && this.getCell().getCellY() == 3))
+						(cellWest.getPiece().getUseAcc() == true &&
+						this.getCell().getCellY() == 3)){
+				
 					result.add(cellNorthWest);
-					*/
+					priseEnPassant = true;
+				}
 				
 				if (cellNorth != null) {
 					
@@ -66,15 +75,21 @@ public class Pawn extends Piece {
 				Cell cellSouthWest = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_WEST, 1);
 				Cell cellSouthEast = board.getCellInDirection(getCell(),DirectionsEnum.DIRECTION_SOUTH_EAST, 1);
 				
-				/*prise en passant 
+				// prise en passant 
 				if (cellEast != null && cellEast.getPiece() != null && 
-						(cellEast.getPiece().getUseAcc() == false && this.getCell().getCellY() == 4 ))
+						(cellEast.getPiece().getUseAcc() == true && 
+						this.getCell().getCellY() == 4 )) {
 					result.add(cellSouthEast);
+					priseEnPassant = true;
+				}
 				
 				if (cellWest != null && cellWest.getPiece() != null &&
-						(cellWest.getPiece().getUseAcc() == false && this.getCell().getCellY() == 4))
-					result.add(cellSouthWest);
-				*/
+						(cellWest.getPiece().getUseAcc() == true && 
+						this.getCell().getCellY() == 4)) {
+					result.add(cellSouthWest );
+					priseEnPassant = true;
+				}
+			
 				
 				if(cellSouth != null) {
 					if (cellSouth.getPiece() == null ) 
@@ -109,5 +124,13 @@ public class Pawn extends Piece {
 			return "/pawn_white.png";
 	}
 	
+
+	public void positionChanged(Cell oldCell, Cell newCell){
+		
+		if (Math.sqrt( Math.pow(newCell.getCellX() - oldCell.getCellX(),2)+ 
+				Math.pow(newCell.getCellY() - oldCell.getCellY(),2)) == 2) 
+			
+			this.setUseAcc();
+	}
 
 }

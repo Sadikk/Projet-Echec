@@ -33,6 +33,8 @@ public class Model {
 	 * Effectue le changement de tour entre le joueur 1 et le joueur 2
 	 */
 	public void switchTurn(){
+		
+		
 		if (_firstPlayer.isPlaying()){
 			System.out.println("Player one ended playing, switching to player two");
 			_firstPlayer.endTurn();

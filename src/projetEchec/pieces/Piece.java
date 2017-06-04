@@ -3,6 +3,7 @@ package projetEchec.pieces;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.EventListenerList;
 
 import projetEchec.IPlayer;
 import projetEchec.UI.Board;
@@ -48,13 +49,16 @@ public abstract class Piece {
 	 */
 	public void moveTo(Cell cell){
 		boolean ended = cell.getPiece() != null && cell.getPiece() instanceof King;
+		Cell oldCell = _cell;
 		_cell.setPiece(null);
 		setCell(cell);
 		_cell.setPiece(this);
 		MainWindow.getInstance().getModel().switchTurn();
+		firePositionChanged(oldCell, cell);
 		_initCell = false;
 		if (ended)
 			JOptionPane.showMessageDialog(MainWindow.getInstance(), "Le roi a été mangé, fin de la partie !");
+		
 	}
 		
 	private boolean _initCell = true;
@@ -62,15 +66,35 @@ public abstract class Piece {
 	public boolean getInitCell() {
 		return _initCell;
 	}
-	/*
-private boolean _useAcc = true;
+	
+	private boolean _useAcc = false;
 	
 	public boolean getUseAcc () {
 		return _useAcc ;
 	}
 	
 	public void setUseAcc() {
-		_useAcc = false;
-	}*/
+		_useAcc = true;
+	}
+	
+	//observer pattern
+	private final EventListenerList _listeners = new EventListenerList();
+	
+	public void addMovementListener(IMovementListener listener){
+		_listeners.add(IMovementListener.class, listener);
+	}
+	
+	public void removeMovementListener(IMovementListener listener){
+		_listeners.remove(IMovementListener.class, listener);
+	}
+	
+	public IMovementListener[] getMovementListeners() {
+		return _listeners.getListeners(IMovementListener.class);
+	}
+	
+	protected void firePositionChanged(Cell oldCell, Cell newCell){
+		for (IMovementListener listener : getMovementListeners())
+			listener.positionChanged(oldCell, newCell);
+	}
 	
 }
