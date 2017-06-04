@@ -62,5 +62,15 @@ public abstract class Piece {
 	public boolean getInitCell() {
 		return _initCell;
 	}
+	/*
+private boolean _useAcc = true;
+	
+	public boolean getUseAcc () {
+		return _useAcc ;
+	}
+	
+	public void setUseAcc() {
+		_useAcc = false;
+	}*/
 	
 }

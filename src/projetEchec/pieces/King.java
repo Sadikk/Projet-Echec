@@ -14,8 +14,7 @@ public class King extends Piece {
 		super(owner);
 	}
 	
-	// TODO Auto-generated method stub
-	// Rock's problem, implement it or not ? 
+	// TODO Auto-generated method stub 
 	
 	@Override
 	public ArrayList<Cell> getPossibleDestinations(Board board) {
@@ -33,7 +32,7 @@ public class King extends Piece {
 				
 			
 		}
-		// Roques
+
 		IPlayer firstPlayer = MainWindow.getInstance().getModel().getFirstPlayer();
 		
 		if (getInitCell() == true && this.getOwner() == firstPlayer ) {
